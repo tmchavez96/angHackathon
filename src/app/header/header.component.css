@@ -1,0 +1,13 @@
+.headerCont{
+    background-color: rgba(0, 0, 0, 0.2);;
+    color: white;
+    padding: 10px;
+    text-align: right;
+    border-bottom: solid;
+    border-color: black;
+    border-width: 5px;
+    height: 150px;
+}
+.headerText{
+  margin-right: 5%;
+}
