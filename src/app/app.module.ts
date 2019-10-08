@@ -3,24 +3,31 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './navbar/navbar.component';
-
-import { ContentComponent } from './content/content.component';
-
+import { HomeComponent } from './home/home.component';
+import { ApplicationComponent } from './application/application.component';
+import { CheckComponent } from './check/check.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CheckService } from './shared/check.service';
+import { ApplicationService } from './shared/application.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    NavbarComponent,
-    ContentComponent
+    HomeComponent,
+    ApplicationComponent,
+    CheckComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CheckService,
+    ApplicationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
