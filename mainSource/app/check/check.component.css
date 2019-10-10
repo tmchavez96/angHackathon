@@ -1,0 +1,23 @@
+.checkCont{
+  padding: 10px;
+  width: 100%;
+  background-color: #326da8;
+  border-radius: 10px;
+  border-bottom: solid;
+  border-right: solid;
+  border-width: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.omegaCont{
+  margin-top: 10%;
+  background-color: #2ac2f5;
+  width: 100%;
+  padding: 5%;
+  border-radius: 20px;
+  border-radius: 10px;
+  border-bottom: solid;
+  border-right: solid;
+  border-width: 5px;
+}

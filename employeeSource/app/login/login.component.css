@@ -1,0 +1,134 @@
+.loginCont{
+  margin-top: 10%;
+  position: relative;
+  background-color: black;
+  width: 50%;
+  margin-left: 25%;
+  text-align: center;
+  padding: 80px;
+  border-radius: 100px;
+}
+
+.logHead{
+  color: white;
+}
+
+.classicL{
+  color: white;
+}
+
+.classicT{
+    border-radius: 20px;
+    width: 100%;
+}
+
+.sweet{
+  margin-top: 10%;
+  margin-left: 0%;
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  background-color: black;
+}
+
+.sweetCont{
+    width: 60%;
+    margin-left: 20%;
+}
+
+.sweet2{
+  margin-top: 10%;
+  margin-left: 1%;
+  width: 98%;
+  height: 40px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.sweet3{
+  margin-top: 10%;
+  margin-left: 2%;
+  width: 96%;
+  height: 40px;
+  border-radius: 20px;
+  background-color: black;
+}
+.sweetT{
+
+  width: 94%;
+  height: 40px;
+  border-radius: 20px;
+  background-color: white;
+  padding-left: 30%;
+}
+
+.sButton{
+  position: relative;
+  margin-top: 20px;
+  width: 40%;
+  max-width: 100px;
+  border-radius: 20px;
+  z-index: 0;
+  overflow: hidden;
+  transition: 2s;
+}
+
+.sButton::before{
+  position: absolute;
+  transition: 2s;
+  content: "";
+  background-color: #3de2f5;
+  width: 55%;
+  height: 00px;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.sButton:hover::before{
+  height: 40px;
+}
+.sButton::after{
+  position: absolute;
+  transition: 2s;
+  content: "";
+  background-color: #3de2f5;
+  width: 55%;
+  height: 0px;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  border-radius: 10px;
+}
+.sButton:hover::after{
+  height: 40px;
+}
+
+.loginCont::before,.loginCont::after{
+  position: absolute;
+  border-radius: 90px;
+  content: "";
+  color: red;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-image: linear-gradient(to right, #0034f7,#4068ff,#5f7ffa,#2ac5f5,#3de2f5,#2ac5f5,#5f7ffa,#4068ff,#0034f7);
+  background-size: 400%;
+  z-index: -1;
+  animation: anim1 10s linear infinite;
+}
+
+.loginCont::after{
+  filter: blur(20px);
+}
+
+@keyframes anim1 {
+  0%{
+    background-position: 0 0;
+  }
+  100%{
+    background-position: 400% 0;
+  }
+}

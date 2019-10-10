@@ -1,0 +1,37 @@
+<div class="superCont">
+<div class="omegaCont">
+<div class = "checkCont">
+  <h1>Check Application Status</h1>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="card" [class.border-success]="approved" [class.border-warning]="pending" [class.border-danger]="denied">
+      <div class="card-header text-center">{{ cardHeader }}</div>
+      <div class="card-body text-center">
+        <form *ngIf="!approved && !denied && !pending" [formGroup]="checkForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Application ID" formControlName="appId" [class.is-invalid]="appId.invalid && appId.touched">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" [disabled]="checkForm.invalid">
+                  <span *ngIf="!sentRequest">Check Status</span>
+                  <span *ngIf="sentRequest" class="spinner-border spinner-border-sm"></span>
+                </button>
+              </div>
+            </div>
+            <small class="text-danger" *ngIf="appId.touched && appId.invalid">
+              You must enter an ID!
+            </small>
+          </div>
+        </form>
+        <div *ngIf="approved || denied || pending">
+          <h5 class="card-title" [class.text-success]="approved" [class.text-warning]="pending" [class.text-danger]="denied">{{ statusMsg }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+</div>
+</div>

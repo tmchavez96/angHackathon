@@ -1,0 +1,30 @@
+<div class="loginCont">
+  <h1 class="logHead"> Welcome to TCS Credit Union Internal</h1>
+  <form>
+    <label class="classicL"> Username </label><br>
+    <input type="text" class="classicT" [value]="uname" (input)="uname = $event.target.value"><br>
+    <label class="classicL"> Password </label><br>
+    <input type="text" class="classicT" [value]="password" (input)="password = $event.target.value"><br>
+    <!--
+    <div class="sweetCont">
+      <div class="sweet sParent">
+        <div class="sweet2">
+          <div class="sweet3">
+            <input type="text" name="uname" value="" class="sweetT" placeholder="username">
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="sweetCont">
+        <div class="sweet sParent">
+          <div class="sweet2">
+            <div class="sweet3">
+              <input type="text" name="pass" value="" class="sweetT" placeholder="password">
+            </div>
+          </div>
+        </div>
+    </div>
+    -->
+    <button type="button" class="sButton" (click)="onSubmit()"> Login!</button>
+  </form>
+</div>

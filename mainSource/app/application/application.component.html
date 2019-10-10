@@ -1,0 +1,264 @@
+<div class="applicationCont">
+<div class="appMainHeader">
+  <h1> Credit Application </h1>
+</div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <form *ngIf="!submitted" [formGroup]="angForm" (ngSubmit)="submit()" novalidate>
+      <div class="appHeader">
+        <h2 >Personal Information</h2>
+      </div>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <label for="firstname">FIRST NAME</label>
+            <input class="form-control" formControlName="firstname" type="text" id="firstname">
+          </div>
+          <div class="col">
+            <label for="middleinitial">M.I.</label>
+            <input class="form-control" type="text" formControlName="middleinitial" id="middleinitial">
+          </div>
+          <div class="col">
+            <label for="lastname">LAST NAME</label>
+            <input class="form-control" formControlName="lastname" type ="text" id="lastname">
+          </div>
+        </div>
+      </div>
+      <div *ngIf="angForm.controls['firstname'].invalid && (angForm.controls['firstname'].dirty || angForm.controls['firstname'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['firstname'].errors.required">
+          First name is required.
+        </div>
+      </div>
+      <div *ngIf="angForm.controls['lastname'].invalid && (angForm.controls['lastname'].dirty || angForm.controls['lastname'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['lastname'].errors.required">
+          Last name is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <label for="socialsecurity">SOCIAL SECURITY</label>
+            <input class="form-control" formControlName="socialsecurity" type="text" [pattern]="ssnPattern" id="socialsecurity" (input)="SSNExists = false">
+          </div>
+          <div class="col">
+            <label for="dob">DATE OF BIRTH</label>
+            <input class="form-control" formControlName="dob" type="date" id="dob">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>ARE YOU A U.S. CITIZEN?</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="citizen" id="citizenYes" value="yes" formControlName="citizen" (change)="citizenOfUS()">
+          <label class="form-check-label" for="citizenYes">YES</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="citizen" id="citizenNo" value="no" formControlName="citizen" (change)="citizenOfUS()">
+          <label class="form-check-label" for="citizenNo">NO</label>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="isCitizen == 'no'">
+          <label>ARE YOU A U.S. RESIDENT?</label><br>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="resident" id="residentYes" value="yes" formControlName="resident" (change)="residentOfUS()">
+              <label class="form-check-label" for="residentYes">YES</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="resident" id="residentNo" value="no" formControlName="resident" (change)="residentOfUS()">
+              <label class="form-check-label" for="residentNo">NO</label>
+          </div>
+      </div>
+      <div class="form-group" *ngIf="isResident == 'yes' || isResident == 'no'">
+          <label for="country">WHICH COUNTRY DO YOU HOLD CITIZENSHIP?</label>
+          <input class="form-control" name="country" formControlName="country" type="text" id="country">
+      </div>
+      <div class="form-row" *ngIf="isResident == 'yes' || isResident == 'no'">
+        <div class="col">
+          <button type="button" class="btn btn-link" (click)="addSecondCountry()">Add Second Country</button>
+        </div>
+        <div class="col" *ngIf="hasSecondCountry && (isResident == 'yes' || isResident == 'no')">
+          <button type="button" class="btn btn-link" (click)="removeSecondCountry()">Remove Second Country</button>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="isCitizen == 'yes'">
+          <label>ARE YOU A CITIZEN OF ANOTHER COUNTRY?</label><br>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="citizen_2" id="citizen_2_Yes" value="yes" formControlName="citizen_2" (change)="addSecondCountry_2()">
+              <label class="form-check-label" for="citizen_2_Yes">YES</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="citizen_2" id="citizen_2_No" value="no" formControlName="citizen_2" (change)="addSecondCountry_2()">
+              <label class="form-check-label" for="citizen_2_No">NO</label>
+          </div>
+      </div>
+
+      <div class="form-group" *ngIf="hasSecondCountry">
+          <label for="country_2">SECOND COUNTRY'S NAME?</label>
+          <input class="form-control" name="country_2" formControlName="country_2" type="text" id="country_2">
+      </div>
+
+
+      <div *ngIf="angForm.controls['socialsecurity'].invalid && (angForm.controls['socialsecurity'].dirty || angForm.controls['socialsecurity'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['socialsecurity'].errors.required">
+          Social security is required.
+        </div>
+        <div *ngIf="ssn.errors?.pattern">
+          Social Security Number is invalid.
+        </div>
+      </div>
+
+      <div *ngIf="SSNExists" class="alert alert-danger">
+        An application with that SSN already exists!
+      </div>
+
+      <div *ngIf="angForm.controls['dob'].invalid && (angForm.controls['dob'].dirty || angForm.controls['dob'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['dob'].errors.required">
+          Date of Birth is required.
+        </div>
+      </div>
+      <div class="appHeader">
+        <h2>Contact Information</h2>
+      </div>
+      <div class="form-group">
+        <label for="residentialAddress">RESIDENTIAL ADDRESS (No PO Boxes or CMRA)</label>
+        <input class="form-control" formControlName="address" type="text" id="residentialAddress">
+        <button type="button" class="btn btn-link" (click)="toggleMailingAddress()">{{ mailingAddressText }}</button>
+      </div>
+      <div *ngIf="angForm.controls['address'].invalid && (angForm.controls['address'].dirty || angForm.controls['address'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['address'].errors.required">
+          Residential address is required.
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="showMailingAddress">
+          <div class="row">
+              <div class="col">
+                  <label for="mailingAddress">MAILING ADDRESS (No PO Boxes or CMRA)</label>
+                  <input class="form-control" formControlName="mailingAddress" type="text" id="mailingAddress">
+              </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <label for="email">EMAIL ADDRESS</label>
+            <input class="form-control" formControlName="email" type="email" email id="email">
+          </div>
+          <div class="col">
+            <label for="phone">PHONE NUMBER</label>
+            <input class="form-control" formControlName="phone" type="text" [pattern]="phonePattern" id="phone">
+          </div>
+        </div>
+      </div>
+      <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['email'].errors.required">
+          Email address is required.
+        </div>
+        <div *ngIf="angForm.controls['email'].errors.email">
+          Email is invalid.
+        </div>
+      </div>
+      <div *ngIf="angForm.controls['phone'].invalid && (angForm.controls['phone'].dirty || angForm.controls['phone'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['phone'].errors.required">
+          Primary phone number is required.
+        </div>
+        <div *ngIf="phone.errors?.pattern">
+          Primary phone number is invalid.
+        </div>
+      </div>
+      <div class="appHeader">
+        <h2>Financial Information</h2>
+      </div>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-sm">
+            <label for="bank">DO YOU HAVE ANY BANK ACCOUNTS?</label>
+            <select class="custom-select" id="bank" formControlName="bank">
+              <option value="CheckingSavings">Checking & Savings</option>
+              <option value="Checking">Checking</option>
+              <option value="Savings">Savings</option>
+              <option value="Neither">Neither</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="employment">EMPLOYMENT STATUS</label>
+            <select class="custom-select" id="employment" (change)="employmentStatus($event)" formControlName="employment">
+              <option value="Employed">Employed</option>
+              <option value="Self-Employed">Self-Employed</option>
+              <option value="Retired">Retired</option>
+              <option value="Student">Student</option>
+              <option value="Unemployed">Unemployed</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="angForm.controls['bank'].invalid && (angForm.controls['bank'].dirty || angForm.controls['bank'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['bank'].errors.required">
+          Bank account type is required.
+        </div>
+      </div>
+      <div *ngIf="angForm.controls['employment'].invalid && (angForm.controls['employment'].dirty || angForm.controls['employment'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['employment'].errors.required">
+          Employment status is required.
+        </div>
+      </div>
+      <div class="form-group" *ngIf="employmentStatusValue == 'Employed' || employmentStatusValue == 'Self-Employed' || employmentStatusValue == 'Other'">
+          <div class="form-row">
+              <div class="col">
+                  <label for="occupation">OCCUPATION?</label>
+                  <input type="text" id="occupation" name="occupation" formControlName="occupation" class="form-control myOccupation">
+              </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <label for="income">TOTAL ANNUAL INCOME</label>
+            <input class="form-control" formControlName="annualIncome" type="number" id="income">
+          </div>
+          <div class="col">
+            <label for="mortgagerent">MONTHLY RENT/MORTGAGE</label>
+            <input class="form-control" formControlName="monthlyRent" type="number" id="mortgagerent">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="angForm.controls['annualIncome'].invalid && (angForm.controls['annualIncome'].dirty || angForm.controls['annualIncome'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['annualIncome'].errors.required">
+          Total annual income is required.
+        </div>
+      </div>
+      <div *ngIf="angForm.controls['monthlyRent'].invalid && (angForm.controls['monthlyRent'].dirty || angForm.controls['monthlyRent'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['monthlyRent'].errors.required">
+          Mortgage/rent is required.
+        </div>
+      </div>
+      <div class="centerMe">
+      <button type="submit" [disabled]="angForm.invalid || waiting" class="btn btn-primary">
+        <span *ngIf="!waiting">Submit Application</span>
+        <span *ngIf="waiting" class="spinner-border spinner-border-sm"></span>
+      </button>
+      </div>
+    </form>
+    <div *ngIf="submitted" class="card" [class.border-success]="autoApproved" [class.border-warning]="!autoApproved">
+      <div class="card-header text-center">Application Status</div>
+      <div class="card-body text-center">
+        <h5 *ngIf="autoApproved" class="card-title text-success">Congratulations! You have been automatically approved!</h5>
+        <h5 *ngIf="!autoApproved" class="card-title text-warning">Your application has been submitted! Use this code to check the status of your application.</h5>
+        <p *ngIf="!autoApproved" class="card-text">{{ appId }}</p>
+        <a routerLink="">Back to Home</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+</div>

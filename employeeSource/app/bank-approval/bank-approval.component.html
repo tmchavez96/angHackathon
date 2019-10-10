@@ -1,0 +1,37 @@
+<div class="listingCont">
+<div class="row text-center">
+  <div class="col-md-12">
+    <h1>Application List</h1>
+    <div *ngIf="!loadedList" class="spinner-grow text-primary" role="status"></div>
+    <h6 *ngIf="loadedList && arr.length == 0">No pending applications</h6>
+    <table *ngIf="loadedList && arr.length > 0" class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">SSN</th>
+          <th scope="col">Name</th>
+          <th scope="col">Credit Score</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of arr; let i = index">
+          <th class="tblElm r1" scope="row">{{ i }}</th>
+          <td class="tblElm r2"><span class="">{{ h.SSN }}</span></td>
+          <td class="tblElm r3"><span class="">{{ h.firstName }} {{ h.lastName }}</span></td>
+          <td class="tblElm r4"><span class="">{{ h.creditScore }}</span></td>
+          <td class="tblElmEnd r5">
+            <div *ngIf="h.status == 'waiting'" class="spinner-border text-primary" role="status"></div>
+            <div *ngIf="h.status == 'none'" class="btn-group" role="group">
+              <button type="button" class="btn btn-success" (click)="actOnApplication(h, true)">Approve</button>
+              <button type="button" class="btn btn-danger" (click)="actOnApplication(h, false)">Deny</button>
+            </div>
+            <i *ngIf="h.status == 'approved'" class="fas fa-check text-success"></i>
+            <i *ngIf="h.status == 'denied'" class="fas fa-times text-danger"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
