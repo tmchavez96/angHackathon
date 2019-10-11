@@ -1,0 +1,179 @@
+
+.headerCont{
+  background-color: #2ac2f5;
+  border-radius: 5px;
+
+}
+
+.myNav{
+  background: black;
+  border-radius: 10px;
+}
+
+.myButton{
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  background-color: #2e7a85;
+  background-size: 400%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.myButton::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100px;
+  background-color: #2ac2f5;
+  z-index: -1;
+  transition: 0.8s;
+}
+
+.myButton:hover::before{
+  width: 50%;
+}
+
+.myButton::after{
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 0%;
+  height: 100px;
+  background-color: #2ac2f5;
+  z-index: -1;
+  transition: 0.8s;
+}
+
+.myButton:hover::after{
+  width: 50%;
+}
+
+.imgCont{
+    background-color: black;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    max-width: 500px;
+    height: 400px;
+    border: solid;
+    color: hidden;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.superImg{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.myImg{
+  position: absolute;
+  top: 400px;
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.mi1{
+  animation-name: myCaro;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+}
+.mi2{
+  animation-name: myCaro2;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+}
+.mi3{
+  animation-name: myCaro3;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes myCaro{
+  0%{
+    top: 0px;
+  }
+  30%{
+    top: 0px;
+  }
+  38%{
+    top: 400px;
+  }
+  92%{
+    top: 400px;
+  }
+  100%{
+    top: 0px;
+  }
+}
+
+@keyframes myCaro2{
+  0%{
+    top: 400px;
+  }
+  30%{
+    top: 400px;
+  }
+  37%{
+    top: 0px;
+  }
+  65%{
+    top: 0px;
+  }
+  72%{
+    top: 400px;
+  }
+}
+@keyframes myCaro3{
+  0%{
+    top: 400px;
+  }
+  66%{
+    top: 400px;
+  }
+  72%{
+    top: 0px;
+  }
+  92%{
+    top: 0px;
+  }
+  100%{
+    top: 400px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .superImg{
+    width: 300px;
+    height: 200px;
+  }
+  .imgCont{
+    width: 60%;
+    height: 200px;
+  }
+}
+
+.footer{
+  position: absolute;
+  bottom: 0px;
+  left: 0%;
+  text-align: right;
+  padding: 10px;
+  width: 100%;
+  background-color: #2ac2f5;
+  border-radius: 5px;
+  bottom: 0px;
+}
+.footerTxt{
+  font-size: 15px;
+  margin-top: 10px;
+}

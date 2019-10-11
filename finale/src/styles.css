@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body {
+  background-color: #153a7d;
+}
+
+.safeKeeping{
+  background-image: linear-gradient(to bottom right,#0d0b0b,#1b2840,#153a7d,#003594);
+}

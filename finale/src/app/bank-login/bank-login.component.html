@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="loginCont text-center p-5">
+      <h1 class="text-light"> Welcome to TCS Credit Union Internal</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label class="text-light">Username</label>
+          <input type="text" class="form-control rounded-pill p-2 pl-3 pr-3" formControlName="username" (input)="failed = false">
+        </div>
+        <div class="form-group">
+          <label class="text-light">Password</label>
+          <input type="password" class="form-control rounded-pill p-2 pl-3 pr-3" formControlName="password" (input)="failed = false">
+        </div>
+        <button type="submit" class="sButton btn-block btn-secondary rounded-pill p-3 mt-4" [disabled]="loginForm.invalid">
+          <h3 class="m-0">Login</h3>
+        </button>
+        <small *ngIf="failed" class="text-danger">Failed to login with username and password combination.</small>
+      </form>
+    </div>
+  </div>
+  <div class="col-2"></div>
+</div>
